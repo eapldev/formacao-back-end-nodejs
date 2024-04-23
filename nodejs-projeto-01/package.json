@@ -1,0 +1,15 @@
+{
+  "name": "nodejs-projeto-01",
+  "version": "1.0.0",
+  "description": "Projeto nodejs do básico ao avançado.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Eduardo Aparecido",
+  "license": "ISC",
+  "dependencies": {
+    "geolib": "^3.3.4"
+  }
+}
