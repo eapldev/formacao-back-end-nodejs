@@ -1,9 +1,12 @@
-// cria um array para simular um banco de dados
+// cria uma array para simular um banco de dados
 let users = [];
-
 
 function createUser(request, response) {
   const { name, age } = request.body;
+
+  // 0 1 2 3 4 5 6
+  // 6
+  // length => 7 - 1 = 6
 
   const newUser = {
     id: users.length ? users[users.length - 1].id + 1 : 1,
@@ -20,14 +23,12 @@ function listUsers(request, response) {
 }
 
 function listUserDetail(request, response) {
-  console.log(request.params.id);
-
   const currentUser = users.find(
     (user) => user.id === parseInt(request.params.id)
   );
 
   if (!currentUser)
-    return response.status(404).json("Não foi encontrado nenhum usuário.");
+    return response.status(404).json("Não foi encontrado nenhum usuário");
 
   return response.status(200).json(currentUser);
 }

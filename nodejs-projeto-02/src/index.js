@@ -6,6 +6,6 @@ const app = express();
 
 // configura o express para usar o padrão json de comunicação
 app.use(express.json());
-app.use(routes)
+app.use(routes);
 
 app.listen(3000);
