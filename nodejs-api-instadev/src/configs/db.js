@@ -1,5 +1,7 @@
 require('dotenv').config();
 
+dialect: process.env.DIALECT,
+
 module.exports = {
   dialect: process.env.DIALECT,
   host: process.env.HOST,
