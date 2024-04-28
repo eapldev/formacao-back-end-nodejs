@@ -1,5 +1,5 @@
 {
-  "editor.fontSize": 20,
+  "editor.fontSize": 16,
   "editor.fontFamily": "Consolas, 'Courier New', monospace",
-  "editor.fontWeight": "100"
+  "editor.fontWeight": "500",
 }

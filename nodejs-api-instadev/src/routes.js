@@ -13,13 +13,18 @@ const routes = new Router();
 
 routes.post("/user", schemaValidator(userSchema), UserControler.create);
 
-routes.post("/auth",schemaValidator(authSchema), AuthenticationController.authenticate);
-
+routes.post(
+  "/auth",
+  schemaValidator(authSchema),
+  AuthenticationController.authenticate
+);
 
 routes.get("/health", (require, response) => {
   return response.send({ message: "Connected with success!" });
 });
 
 routes.use(AuthenticationMiddleware);
+
+routes.put("/user", UserControler.update);
 
 module.exports = routes;
