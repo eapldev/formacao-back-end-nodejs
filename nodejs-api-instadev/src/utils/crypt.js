@@ -13,7 +13,7 @@ const encrypt = (text) => {
   ]);
 
   return {
-    iv: iv.toString(),
+    iv: iv.toString("hex"),
     content: encrypted.toString("hex"),
   };
 };
