@@ -12,7 +12,7 @@ class AuthenticationController {
     } else if (user_name) {
       whereClause.user_name = user_name;
     } else {
-      return res.status(401).json({ error: "We need a e-mail or password!" });
+      return res.status(401).json({ error: "We need a e-mail or username!" });
     }
 
     const user = await Users.findOne({
@@ -23,7 +23,7 @@ class AuthenticationController {
       return res.status(401).json({ error: "User not found!" });
     }
 
-    if (!(await user.checkPassword(password))) {
+    if (!await user.checkPassword(password)) {
       return res.status(401).json({ error: "Password does not match!" });
     }
 
@@ -33,8 +33,8 @@ class AuthenticationController {
 
     const newId = `${iv}:${content}`;
 
-    const token = jwt.sign({ newId }, process.env.HASH_BCRYPT, {
-      expiresIn: "7d",
+    const token = jwt.sign({ userId: newId }, process.env.HASH_BCRYPT, {
+      expiresIn: process.env.EXPIRE_IN,
     });
 
     return res
