@@ -87,20 +87,51 @@ class PostController {
     });
 
     if (!verifyPost) {
-      return res.status(404).json({ message: 'Post does not exits!' });
+      return res.status(404).json({ message: "Post does not exits!" });
     }
 
-    const postUpdate = await Posts.update({ number_likes: verifyPost.number_likes + 1 },
+    const postUpdate = await Posts.update(
+      { number_likes: verifyPost.number_likes + 1 },
       {
         where: { id },
-      });
+      }
+    );
 
     if (!postUpdate) {
-      return res.status(400).json({ message: 'Failed to add like in this post!' });
+      return res
+        .status(400)
+        .json({ message: "Failed to add like in this post!" });
     }
 
     return res.status(200).json({
-      message: 'Like storaged!',
+      message: "Like storaged!",
+    });
+  }
+
+  async listMyPosts(req, res) {
+    const allPosts = await Posts.findAll({
+      where: {
+        author_id: req.userId,
+      },
+    });
+
+    if (!allPosts) {
+      return res.status(400).json({ message: "Failed to list all posts" });
+    }
+
+    const formattedData = [];
+
+    for (const item of allPosts) {
+      formattedData.push({
+        id: item.id,
+        image: item.image,
+        description: item.description,
+        number_likes: item.number_likes,
+      });
+    }
+
+    return res.status(200).json({
+      data: formattedData,
     });
   }
 }
