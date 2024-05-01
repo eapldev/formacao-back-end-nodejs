@@ -102,6 +102,30 @@ class UserControler {
 
     return res.status(200).json({ message: "User deleted!" });
   }
+
+  async userProfile(req, res) {
+    const user = await Users.findOne({
+      attributes: [
+        "id",
+        "name",
+        "user_name",
+        "email",
+        "avatar",
+        "bio",
+        "gender",
+      ],
+      where: {
+        id: req.userId,
+      },
+    });
+
+    if (!user) {
+      return res.status(400).json({ message: "User not exists!" });
+    }
+
+    console.log(user);
+    return res.status(200).json({ user });
+  }
 }
 
 module.exports = new UserControler();
