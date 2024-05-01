@@ -26,5 +26,6 @@ routes.get("/health", (require, response) => {
 routes.use(AuthenticationMiddleware);
 
 routes.put("/user", UserControler.update);
+routes.delete("/user", UserControler.delete);
 
 module.exports = routes;
