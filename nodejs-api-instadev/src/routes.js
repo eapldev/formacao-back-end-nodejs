@@ -9,7 +9,11 @@ const authSchema = require("./schema/auth.schema.json");
 
 const UserControler = require("./apps/controllers/UserController");
 const userSchema = require("./schema/create.user.schema.json");
+
 const FileController = require("./apps/controllers/FileController");
+
+const PostController = require("./apps/controllers/PostController");
+const postSchema = require("./schema/post.schema.json");
 
 const routes = new Router();
 
@@ -33,4 +37,5 @@ routes.get("/user-profile", UserControler.userProfile);
 
 routes.post("/upload", upload.single("image"), FileController.upload);
 
+routes.post("/new-post", schemaValidator(postSchema), PostController.create);
 module.exports = routes;
