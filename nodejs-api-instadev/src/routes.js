@@ -33,14 +33,14 @@ routes.use(AuthenticationMiddleware);
 
 routes.put("/user", UserControler.update);
 routes.delete("/user", UserControler.delete);
-routes.get("/user-profile", UserControler.userProfile);
+routes.get("/user", UserControler.userProfile);
 
 routes.post("/upload", upload.single("image"), FileController.upload);
 
 routes.post("/posts", schemaValidator(postSchema), PostController.create);
 routes.delete("/posts/:id", PostController.delete);
 routes.put("/posts/:id", PostController.update);
-routes.get("posts", PostController.listAllPosts);
+routes.get("/posts", PostController.listAllPosts);
 
 routes.put("/posts/add-like/:id", PostController.addLike);
 routes.get("/posts/my-posts", PostController.listMyPosts);
