@@ -1,9 +1,14 @@
+require("dotenv").config();
+
 const fsp = require("fs/promises");
 const B2 = require("backblaze-b2");
 
+const { APLICATION_KEY_ID, APLICATION_KEY, BUCKET_ID, BASE_URL_BACKBLAZE } =
+  process.env;
+
 const b2 = new B2({
-  applicationKeyId: "460f4e93da88",
-  applicationKey: "002643ee0ebc92a6ac0f45c909b0883428dd23727e",
+  applicationKeyId: APLICATION_KEY_ID,
+  applicationKey: APLICATION_KEY,
 });
 
 const unlinkAsync = fsp.unlink;
@@ -26,7 +31,7 @@ class FileController {
       const {
         data: { uploadUrl, authorizationToken },
       } = await b2.getUploadUrl({
-        bucketId: "c4e690dfa41e39b38dfa0818",
+        bucketId: BUCKET_ID,
       });
 
       const { data } = await b2.uploadFile({
@@ -39,7 +44,7 @@ class FileController {
       await unlinkAsync(path);
 
       return res.send({
-        url: `https://f002.backblazeb2.com/file/bucket-instadev/${data.fileName}`,
+        url: `${BASE_URL_BACKBLAZE}${data.fileName}`,
       });
     } catch (error) {
       return res.status(400).send({ message: "Failed to upload" });
