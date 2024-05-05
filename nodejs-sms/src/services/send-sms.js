@@ -1,15 +1,15 @@
 const { Vonage } = require("@vonage/server-sdk");
 
 const vonage = new Vonage({
-  apiKey: "<apikey>",
-  apiSecret: "<apisecret>",
+  apiKey: "YOUR_API_KEY",
+  apiSecret: "YOUR_API_SECRET",
 });
 
-const from = "<seunome>";
-const to = "<seunumero>";
+const from = "<your_name>";
+const to = "<person_number>";
 
 async function sendSMS(code) {
-  const text = `O seu código é: ${code}`;
+  const text = `O seu código é ${code}`;
 
   await vonage.sms
     .send({ to, from, text })
